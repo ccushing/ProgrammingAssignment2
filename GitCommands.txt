@@ -1,5 +1,0 @@
-
-cd "C:\Users\ccushing\Documents\2014\Coursera\RProgramming\Assignment2"
-git clone git://github.com/ccushing/ProgrammingAssignment2.git
-
-

@@ -10,11 +10,16 @@
 
 makeCacheMatrix <- function(x = matrix()) {
 
+    ## Store the value of the inverse in m
   m <- NULL
+  
+  ## define a set function to store y in the cache
+  ## reset the inverse (m) to null if y changes
   set <- function(y) {
     x <<- y
     m <<- NULL
   }
+  
   get <- function() x
   
   setinverse <- function(inv) m <<- inv
@@ -28,18 +33,22 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
 ## This function will solve the inverse of the matrix x. It will first check to see if the result has already been
-## cached. If it has, then it will return the cached version.
+## cached. If it has, then it will return the cached version if not, it will calculate the inverse, return it, and 
+## store the cached value.
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
   
+  ## Variable m stores the inverse of the matrix
   m <- x$getinverse()
+  
+  ## Check to see if the cache already exists
   if(!is.null(m)) {
     message("getting cached data")
     return(m)
   }
+  
   data <- x$get()
   m <- solve(data)
   x$setinverse(m)
@@ -47,34 +56,6 @@ cacheSolve <- function(x, ...) {
   
 }
 
-
-
-makeVector <- function(x = numeric()) {
-  m <- NULL
-  set <- function(y) {
-    x <<- y
-    m <<- NULL
-  }
-  get <- function() x
-  setmean <- function(mean) m <<- mean
-  getmean <- function() m
-  list(set = set, get = get,
-       setmean = setmean,
-       getmean = getmean)
-}
-
-
-cachemean <- function(x, ...) {
-  m <- x$getmean()
-  if(!is.null(m)) {
-    message("getting cached data")
-    return(m)
-  }
-  data <- x$get()
-  m <- mean(data, ...)
-  x$setmean(m)
-  m
-}
 
 
 
